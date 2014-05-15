@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>WMS + Time Hurricane Example</title>
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+  <!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.ie.css" /><![endif]-->
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" type="text/css">
+</head>
+
+<body>
+  <div id="map" style="width: 100%; height: 600px"></div>
+
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+
+  <!-- Include this library for mobile touch support  -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script>
+
+  <script src="dist/leaflet.lwds.min.js"></script>
+
+  <script>
+  var sliderControl = null;
+
+  // Hurricane start parameters
+  var Map = L.map('map').setView([29.96, -90.05], 5);
+  var startTime = '2005-08-29T00:00:00';
+  var endTime = '2005-08-30T15:00:00';
+  var timeStep = 1000 * 60 * 60;
+  var range = false;
+
+  /*
+  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+    transparent: false
+  }).addTo(Map);
+  */
+
+  // UAF GINA's Best Data Layer 
+  L.tileLayer.wms('http://wms.alaskamapped.org/bdl', {
+	layers: 'bdl_low_res,bdl_mid_res,bdl_high_res',
+	format: 'image/jpeg',
+	trasparent: false,
+	attribution: 'GINA Best Data Layer'
+  }).addTo(Map);
+
+  // Hurricane Katrina WMS Layer
+  var hurricane = L.tileLayer.wms('http://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r-t.cgi', {
+	layers: 'nexrad-n0r-wmst',
+	transparent: true,
+	format: 'image/png',
+	time: startTime 
+  });
+  hurricane.addTo(Map);
+
+  // Initialize slider options
+  sliderControl = L.control.sliderControl({
+        position: "topright",
+	layer: hurricane,
+	startTime: startTime, 
+	endTime: endTime,
+	timeStep: timeStep,
+	range: range 
+      });
+
+    //Make sure to add the slider to the map 
+    Map.addControl(sliderControl);
+
+    //And initialize the slider
+    sliderControl.startSlider();
+  </script>
+</body>
+
+</html>

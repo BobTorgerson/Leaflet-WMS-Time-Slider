@@ -1,0 +1,6 @@
+{
+    "name": "leaflet-wms-dimension-slider",
+    "homepage": "https://github.com/BobTorgerson/Leaflet-WMS-Time-Slider",
+    "version": "1.0.1",
+    "main": "dist/leaflet.lwds.min.js"
+}
