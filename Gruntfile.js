@@ -3,7 +3,7 @@ module.exports = function( grunt ) {
         uglify: {
             dist: {
                 files: {
-                    'dist/leaflet.lwds.min.js': 'dist/leaflet.lwds.min.js'
+                    'dist/leaflet.lwts.min.js': 'dist/leaflet.lwts.min.js'
                 }
             }
         },
@@ -12,7 +12,7 @@ module.exports = function( grunt ) {
                 src: [
                     'SliderControl.js'
                 ],
-                dest: 'dist/leaflet.lwds.min.js'
+                dest: 'dist/leaflet.lwts.min.js'
             }
         }
     });
