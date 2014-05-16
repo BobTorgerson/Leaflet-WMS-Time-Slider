@@ -4,6 +4,8 @@ Leaflet-WMS-Dimension-Slider
 The [Leaflet](http://leafletjs.com/) WMS Dimension Slider enables you to dynamically update a WMS layer based on a dimension such as time. This tool uses the [JQuery UI slider
 ](http://jqueryui.com/slider/). For WMS layers where a range of time is more desirable than a single time step, two sliders appear to allow for a tailored time range to be created.
 
+View the example on [GitHub Pages](http://bobtorgerson.github.io/Leaflet-WMS-Time-Slider/)
+
 Usage
 -----
 Add:
