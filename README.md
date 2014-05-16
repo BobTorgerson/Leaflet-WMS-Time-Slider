@@ -1,7 +1,7 @@
-Leaflet-WMS-Dimension-Slider
+Leaflet-WMS-Time-Slider
 =============
 
-The [Leaflet](http://leafletjs.com/) WMS Dimension Slider enables you to dynamically update a WMS layer based on a dimension such as time. This tool uses the [JQuery UI slider
+The [Leaflet](http://leafletjs.com/) WMS Time Slider enables you to dynamically update a WMS layer based on a dimension such as time. This tool uses the [JQuery UI slider
 ](http://jqueryui.com/slider/). For WMS layers where a range of time is more desirable than a single time step, two sliders appear to allow for a tailored time range to be created.
 
 View the example on [GitHub Pages](http://bobtorgerson.github.io/Leaflet-WMS-Time-Slider/)
@@ -74,10 +74,10 @@ For touch support add:
 
 Bower
 ----
-Leaflet WMS Dimension Slider can be integrated into your project using [Bower](http://bower.io/) (based on [nodejs](http://nodejs.org/)). Run the following to include the LWDS code in your project:
+Leaflet WMS Time Slider can be integrated into your project using [Bower](http://bower.io/) (based on [nodejs](http://nodejs.org/)). Run the following to include the LWDS code in your project:
 ```
 npm install -g bower
-bower install git://github.com/BobTorgerson/Leaflet-WMS-Dimension-Slider.git
+bower install git://github.com/BobTorgerson/Leaflet-WMS-Time-Slider.git
 ```
 
 
