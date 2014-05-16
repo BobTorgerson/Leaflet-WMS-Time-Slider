@@ -13,8 +13,6 @@ L.Control.SliderControl = L.Control.extend({
     initialize: function (options) {
         L.Util.setOptions(this, options);
         this._layer = this.options.layer;
-	this.slider = null;
-        
     },
 
     setPosition: function (position) {
@@ -38,8 +36,8 @@ L.Control.SliderControl = L.Control.extend({
 
         // Create a control sliderContainer with a jquery ui slider
         var sliderContainer = L.DomUtil.create('div', 'slider', this._container);
-        $(sliderContainer).append('<div id="leaflet-slider" style="width:200px"><div class="ui-slider-handle"></div><div id="slider-timestamp" style="width:200px; margin-top:10px;background-color:#FFFFFF"></div></div>');
-        //Prevent map panning/zooming while using the slider
+        $(sliderContainer).append('<div id="leaflet-slider" style="width:200px"><div class="ui-slider-handle"></div><div id="slider-timestamp" style="width:200px; border-top: 1px solid black; margin-top:10px;background-color:#FFFFFF"></div></div>');
+        // Prevent map panning/zooming while using the slider
         $(sliderContainer).mousedown(function () {
             map.dragging.disable();
         });
@@ -49,7 +47,7 @@ L.Control.SliderControl = L.Control.extend({
 
         var options = this.options;
 
-        //If a layer has been provided: calculate the min and max values for the slider
+        // Make sure a layer has been passed before creating a slider
         if (!this._layer) {
             console.log("Error: You have to specify a layer via new SliderControl({layer: your_layer});");
         }
@@ -64,10 +62,16 @@ L.Control.SliderControl = L.Control.extend({
     startSlider: function () {
         options = this.options;
 	var curLayer  = this._layer;
+
+	// Current position of the slider  
 	var curTime = new Date(options.startTime);
 	if (options.range) {
+	   // If a range, this is the second position for the slider
 	   var curTime2 = new Date(options.startTime);
 	}
+	
+	// Start and ending times are split into a number of slider positions based on number of milliseconds
+	// requested to separate each position
 	var beginTime = new Date(options.startTime);
 	var finalTime = new Date(options.endTime);
 	var timesteps = Math.round((finalTime - beginTime) / options.timeStep);
@@ -94,14 +98,17 @@ L.Control.SliderControl = L.Control.extend({
                 var map = options.map;
 
 		if (options.range) {
-			// Options range is true
 			curTime.setTime(beginTime.getTime() + (ui.values[0] * options.timeStep));
 			curTime2.setTime(beginTime.getTime() + (ui.values[1] * options.timeStep));
 			var timeString = curTime.toISOString() + "/" + curTime2.toISOString();
+
+			// Leaflet's TileLayer's setParams function re-requests tiles based upon the new parameters
 			curLayer.setParams({time: timeString});
 		} else {
 			curTime.setTime(beginTime.getTime() + (ui.value * options.timeStep));
 			var timeString = curTime.toISOString();
+
+			// Leaflet's TileLayer's setParams function re-requests tiles based upon the new parameters
 			curLayer.setParams({time: timeString});
 		}
             }
