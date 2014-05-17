@@ -67,6 +67,11 @@ Should your WMS layer need to have a range for time, specify range: true to crea
 var sliderControl = L.control.sliderControl({position: 'topright', layer: hurricane, startTime: '2005-08-29T00:00:00', endTime: '2005-08-30T15:00:00', timeStep: 1000*60*60, range: true});
 ````
 
+Should you have two or more WMS layers that you want to have affected by the time slider, use the option "layers" rather than "layer" and pass an array of WMS Tilelayers.
+```javascript
+var sliderControl = L.control.sliderControl({position: 'topright', layers: [hurricane, ocean_currents], startTime: '2005-08-29T00:00:00', endTime: '2005-08-30T15:00:00', timeStep: 1000*60*60});
+````
+
 For touch support add:
 ```javascript
 <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script>

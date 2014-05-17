@@ -12,7 +12,19 @@ L.Control.SliderControl = L.Control.extend({
 
     initialize: function (options) {
         L.Util.setOptions(this, options);
-        this._layer = this.options.layer;
+
+	// Initialize variables
+	this._layer = null;
+	this.multilayer = false;
+
+	// Check for multiple layers passed to SliderControl
+	if (this.options.layers == null) { 
+        	this._layer = this.options.layer;
+		this.multilayer = false;
+	} else {
+		this._layer = this.options.layers;
+		this.multilayer = true;
+	}
     },
 
     setPosition: function (position) {
@@ -49,7 +61,7 @@ L.Control.SliderControl = L.Control.extend({
 
         // Make sure a layer has been passed before creating a slider
         if (!this._layer) {
-            console.log("Error: You have to specify a layer via new SliderControl({layer: your_layer});");
+            console.log("Error: You have to specify a layer via new SliderControl({layer: your_layer}); or like SliderControl({layers: [your_layer1, your_layer2]});");
         }
         return sliderContainer;
     },
@@ -75,6 +87,10 @@ L.Control.SliderControl = L.Control.extend({
 	var beginTime = new Date(options.startTime);
 	var finalTime = new Date(options.endTime);
 	var timesteps = Math.round((finalTime - beginTime) / options.timeStep);
+
+	// Check for multiple layers passed to Slider Control
+	var multilayer = this.multilayer;
+
         $("#leaflet-slider").slider({
             range: options.range,
 	    min: 0,
@@ -103,13 +119,25 @@ L.Control.SliderControl = L.Control.extend({
 			var timeString = curTime.toISOString() + "/" + curTime2.toISOString();
 
 			// Leaflet's TileLayer's setParams function re-requests tiles based upon the new parameters
-			curLayer.setParams({time: timeString});
+			if (multilayer == true) {
+				for (var i = 0; i < curLayer.length; i++) {
+					curLayer[i].setParams({time: timeString});
+				}
+			} else {
+				curLayer.setParams({time: timeString});
+			}
 		} else {
 			curTime.setTime(beginTime.getTime() + (ui.value * options.timeStep));
 			var timeString = curTime.toISOString();
 
 			// Leaflet's TileLayer's setParams function re-requests tiles based upon the new parameters
-			curLayer.setParams({time: timeString});
+			if (multilayer == true) {
+				for (var i = 0; i < curLayer.length; i++) {
+					curLayer[i].setParams({time: timeString});
+				}
+			} else {
+				curLayer.setParams({time: timeString});
+			}
 		}
             }
 	});
