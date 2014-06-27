@@ -3,7 +3,7 @@ module.exports = function( grunt ) {
         uglify: {
             dist: {
                 files: {
-                    'dist/leaflet.lwts.min.js': 'dist/leaflet.lwts.min.js'
+                    'dist/leaflet.lwts.min.js': 'dist/leaflet.lwts.js'
                 }
             }
         },
@@ -12,11 +12,18 @@ module.exports = function( grunt ) {
                 src: [
                     'SliderControl.js'
                 ],
-                dest: 'dist/leaflet.lwts.min.js'
+                dest: 'dist/leaflet.lwts.js'
             }
+        },
+        copy: {
+          css: {
+            src: ['SliderControl.css'],
+            dest: 'dist/leaflet.lwts.css'
+          }
         }
     });
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.registerTask('default', ['concat', 'uglify']);
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.registerTask('default', ['concat', 'uglify', 'copy']);
 };
