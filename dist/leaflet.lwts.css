@@ -1,0 +1,9 @@
+.ui-slider-container {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.ui-slider-container .ui-slider-timestamp {
+  margin-top: 10px;
+}

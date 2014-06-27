@@ -2,7 +2,7 @@
     "name": "Leaflet-WMS-Time-Slider",
     "author": "Bob Torgerson",
     "version": "1.0.1",
-    "description": "A Leaflet plug-in for providing a slider bar for updating a map with WMS requests with a dimension field (currently only time). Original code written by Dennis Wilhelm."
+    "description": "A Leaflet plug-in for providing a slider bar for updating a map with WMS requests with a dimension field (currently only time). Original code written by Dennis Wilhelm.",
     "license": "MIT",
     "main": "dist/leaflet.lwts.min.js",
     "dependencies": {
@@ -11,7 +11,8 @@
     "devDependencies": {
         "grunt": "~0.4.1",
         "grunt-contrib-concat": "~0.3.0",
-        "grunt-contrib-uglify": "~0.2.2"
+        "grunt-contrib-uglify": "~0.2.2",
+        "grunt-contrib-copy": "~0.5.0"
     },
     "repository": {
         "type": "git",
@@ -23,6 +24,6 @@
         "leaflet",
         "extension",
         "slider",
-	"wms"
+	      "wms"
     ]
 }
