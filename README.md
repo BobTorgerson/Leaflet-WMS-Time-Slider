@@ -31,7 +31,7 @@ The Slider is initialized with the following options:
 
 * **endTime:** The end time of the slider in time format ISO8601.
 
-* **timeStep:** The amount of time to jump forward for each movement of the slider bar in milliseconds.
+* **timeStep:** The amount of time to jump forward for each movement of the slider bar in seconds.
 
 * **range:** Boolean for determining if a range of time is desired rather than a single time value.
 
