@@ -7,7 +7,9 @@ L.Control.SliderControl = L.Control.extend({
     startTime: -1,
     endTime: -1,
     timeStep: 3600,
-    range: false
+    range: false,
+    dateDisplayFormat: 'YYYY-MM-DDTHH:mm:ssZ',
+    timezone: 'UTC'
   },
 
   initialize: function(options) {
@@ -19,8 +21,8 @@ L.Control.SliderControl = L.Control.extend({
 
     // Start and ending times are split into a number of slider positions based on number of milliseconds
     // requested to separate each position
-    this._begin_time = new Date(options.startTime);
-    this._final_time = new Date(options.endTime);
+    this._begin_time = options.startTime.tz(this.options.timezone);
+    this._final_time = options.endTime.tz(this.options.timezone);
     
     // assume timeStep is in seconds and turn into microseconds
     this.options.timeStep = this.options.timeStep * 1000;
@@ -88,7 +90,8 @@ L.Control.SliderControl = L.Control.extend({
   },
 
   updateLayer: function(timestamps) {
-    timestamp = timestamps[0] + '/' + timestamps[1];
+    // format time to ISO 8601
+    timestamp = moment.utc(timestamps[0]).format() + '/' + moment.utc(timestamps[1]).format();
     
     if (this.multilayer == true) {
       for (var i = 0; i < this._layer.length; i++) {
@@ -98,20 +101,21 @@ L.Control.SliderControl = L.Control.extend({
       }
     } else {
       this._layer.setParams({
+        // format string to ISO 8601
         time: timestamp
       });
     }
   },
   
   updateTimestamp: function(timestamps) {
-    $(this._sliderTimestamp).html(timestamps[0] + ' - ' + timestamps[1]);
+    $(this._sliderTimestamp).html(timestamps[0].format(this.options.dateDisplayFormat) + ' - ' + timestamps[1].format(this.options.dateDisplayFormat));
   },
   
   buildTimestamp: function(start, end) {
-    this._timerange1 = new Date(this._begin_time.getTime() + (start * this.options.timeStep));
-    this._timerange2 = new Date(this._begin_time.getTime() + (end * this.options.timeStep));
+    this._timerange1 = (moment(this._begin_time).add(start * this.options.timeStep, 'ms')).tz(this.options.timezone);
+    this._timerange2 = (moment(this._begin_time).add(end * this.options.timeStep, 'ms')).tz(this.options.timezone);
     
-    return [this._timerange1.toISOString(), this._timerange2.toISOString()];
+    return [this._timerange1, this._timerange2];
   },
 
   startSlider: function() {

@@ -3,7 +3,7 @@ module.exports = function( grunt ) {
         uglify: {
             dist: {
                 files: {
-                    'dist/leaflet.lwts.min.js': 'dist/leaflet.lwts.js'
+                    'dist/leaflet.lwts.min.js': 'dist/leaflet.lwts.js',
                 }
             }
         },

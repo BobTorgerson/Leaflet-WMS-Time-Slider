@@ -6,7 +6,9 @@
     "license": "MIT",
     "main": "dist/leaflet.lwts.min.js",
     "dependencies": {
-        "leaflet": "~0.7.x"
+        "leaflet": "~0.7.x",
+        "moment": "^2.9.0",
+        "moment-timezone": "~0.2.4"
     },
     "devDependencies": {
         "grunt": "~0.4.1",
