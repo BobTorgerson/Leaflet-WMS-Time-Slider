@@ -62,19 +62,9 @@
   var timeStep = 1000 * 60 * 60;
   var range = false;
 
-  /*
   L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
     transparent: false
-  }).addTo(Map);
-  */
-
-  // UAF GINA's Best Data Layer 
-  L.tileLayer.wms('http://wms.alaskamapped.org/bdl', {
-	layers: 'bdl_low_res,bdl_mid_res,bdl_high_res',
-	format: 'image/jpeg',
-	trasparent: false,
-	attribution: 'GINA Best Data Layer'
   }).addTo(Map);
 
   // Hurricane Katrina WMS Layer
